@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyWeather API</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<body>
+    <div>
+        <div class="main-div">
+            <div class="user-data">
+                <h2 class="tab-title">User Data</h2>
+                <div class="data-item">
+                    <label>Username:</label>
+                    <span class="username-span">{{ username }}</span>
+                </div>
+                <div class="data-item">
+                    <label>API Key:</label>
+                    <input type="text" id="api-key" class="api-key" value="{{apikey}}" onfocus="this.select()" readonly>
+                    <form id="generate-form" action="/generateapikey" method="get">
+                        <button type="submit">Generate</button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <button onclick="window.location.href='/'">Go Back</button>
+                <button onclick="window.location.href='/apicalls'">View available calls</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generate-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/generateapikey', true);
+            xhr.onload = function() {
+                if (xhr.status === 200)
+                    document.getElementById('api-key').value = xhr.responseText;
+                else
+                    document.getElementById('api-key').value = 'Failed with code ' + xhr.status;
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
+
+

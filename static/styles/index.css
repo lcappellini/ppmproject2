@@ -1,0 +1,115 @@
+* {
+    font-family: ui-sans-serif,-apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica,Apple Color Emoji,Arial,Segoe UI Emoji,Segoe UI Symbol;
+    color: #C6D2F3;
+}
+
+body {
+    background-color: #1C1E26;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #006EE7;
+}
+button:active {
+    background-color: #0056b3;
+}
+
+
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.login-form div {
+    margin-bottom: 15px;
+}
+.login-form label {
+    margin-bottom: 10px;
+    display: block;
+}
+.login-form input {
+    border: 1px solid #CCCCCC;
+    padding: .5em;
+    font-size: 1em;
+    border-radius: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #1C1E26;
+}
+.login-form button {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 20px;
+}
+
+
+.main-div {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.user-data {
+    padding: 20px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.data-item {
+    display: flex; /* Utilizziamo flexbox per allineare orizzontalmente */
+    align-items: center; /* Allinea verticalmente gli elementi */
+    margin-bottom: 10px;
+}
+.data-item label {
+    font-weight: bold;
+    min-width: 100px; /* Imposta una larghezza minima per l'etichetta */
+    margin-right: 10px; /* Aggiunge spazio tra l'etichetta e il valore */
+    text-align: right; /* Allinea il testo dell'etichetta a destra */
+}
+.data-item .username-span {
+    flex: 1;
+    padding-left: 8px;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+.api-key {
+    flex: 1;
+    color: #1C1E26;
+    user-select: text;
+    background-color: #f9f9f9;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    min-width: 200px; /* Imposta una larghezza minima per l'input API Key */
+}
+.data-item button {
+    margin-left: 5px;
+    font-size: 16px;
+    padding: 9px 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tab-title {
+    text-align: center;
+    font-size:30px;
+    margin:0 0 20px 0;
+}
