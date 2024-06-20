@@ -4,17 +4,153 @@
     <meta charset="UTF-8">
     <title>MyWeather API</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            font-size: 20px;
+        }
+        .method {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .param ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .param li {
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <div>
         <div class="main-div">
-            <h2>API calls list:</h2>
-            <ul>
-                <li></li>
-            </ul>
+            <div>
+                <button onclick="window.location.href='/'">Homepage</button>
+            </div>
+            <h1>API calls list</h1>
+            <table>
+                <tr>
+                    <th>Url</th>
+                    <th>Methods</th>
+                    <th>Description</th>
+                    <th>Parameters</th>
+                </tr>
+                <tr>
+                    <td>/api/forecast</td>
+                    <td class="method">GET, PUT, DELETE</td>
+                    <td>Manages forecast data: supports retrieving, uploading or deleting forecast data</td>
+                    <td>
+                        <ul>
+                            <li><strong>key</strong> - API key (required)</li>
+                            <li><strong>placename</strong> - Place name (optional)</li>
+                            <li><strong>lat</strong>, <strong>lon</strong> - Coordinates (optional)</li>
+                            <li><strong>coords</strong> - Coordinates (optional)</li>
+                            <li><strong>placeid</strong> - Place ID (optional)</li>
+                            <li><strong>date</strong> - Date in ISO format (optional)</li>
+                            <li><strong>details</strong> - Include additional details (optional)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/api/now</td>
+                    <td class="method">GET, PUT</td>
+                    <td>Manages current weather data: supports retrieving and uploading current weather data</td>
+                    <td>
+                        <ul>
+                            <li><strong>placename</strong> - Place name (optional)</li>
+                            <li><strong>lat</strong>, <strong>lon</strong> - Coordinates (optional)</li>
+                            <li><strong>coords</strong> - Coordinates (optional)</li>
+                            <li><strong>placeid</strong> - Place ID (optional)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/api/places</td>
+                    <td class="method">GET</td>
+                    <td>Retrieves place data: supports querying by name or coordinates</td>
+                    <td>
+                        <ul>
+                            <li><strong>placename</strong> - Place name (optional)</li>
+                            <li><strong>lat</strong>, <strong>lon</strong> - Coordinates (optional)</li>
+                            <li><strong>coords</strong> - Coordinates (optional)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/api/conditions</td>
+                    <td class="method">GET</td>
+                    <td>Retrieves weather condition data: supports querying by condition ID</td>
+                    <td>
+                        <ul>
+                            <li><strong>id</strong> - Condition ID (optional)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>/api/alltables</td>
+                    <td class="method">GET</td>
+                    <td>Retrieves all data from all tables in the database</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/</td>
+                    <td class="method">GET</td>
+                    <td>Renders the home page</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/login</td>
+                    <td class="method">GET, POST</td>
+                    <td>Manages user login: renders the login page or handles login form submission</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/logout</td>
+                    <td class="method">GET</td>
+                    <td>Logs out the user and redirects to the home page</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/register</td>
+                    <td class="method">GET, POST</td>
+                    <td>Manages user registration: renders the registration page or handles registration form submission</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/apicalls</td>
+                    <td class="method">GET</td>
+                    <td>Renders this page</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/dashboard</td>
+                    <td class="method">GET</td>
+                    <td>Renders the profile page for logged-in users</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>/generateapikey</td>
+                    <td class="method">GET</td>
+                    <td>Generates a new API key for the logged-in user</td>
+                    <td></td>
+                </tr>
+            </table>
 
             <div>
-                <h1>Execute API calls:</h1>
+                <button onclick="window.location.href='/'">Homepage</button>
             </div>
         </div>
     </div>
