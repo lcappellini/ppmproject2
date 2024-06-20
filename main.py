@@ -410,4 +410,4 @@ def alltables():
 
 if __name__ == "__main__":
     # reset_db(app, db)
-    app.run(debug=True)
+    app.run()
