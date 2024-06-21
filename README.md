@@ -23,9 +23,7 @@ Il progetto include i seguenti file e cartelle:
 Le dipendenze del progetto sono elencate nel file `requirements.txt`:
 
 
-# Modello del Database
-
-## Tabelle del Database
+## Modello del Database
 
 ### Place
 Rappresenta un luogo geografico.
