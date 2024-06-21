@@ -1,15 +1,15 @@
 from datetime import datetime
-from math import radians, asin, sqrt, sin, cos
 
 from flask import Flask, request, render_template, session, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import secrets
+import os
 
 from sqlalchemy import func
 
-app = Flask(__name__)
+app = Flask(__name__, instance_path=os.path.join(os.getcwd(), "tmp"))
 app.secret_key = secrets.token_hex(16)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/db.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 db = SQLAlchemy(app)
 
 
