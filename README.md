@@ -23,6 +23,55 @@ Il progetto include i seguenti file e cartelle:
 Le dipendenze del progetto sono elencate nel file `requirements.txt`:
 
 
+# Modello del Database
+
+## Tabelle del Database
+
+### Place
+Rappresenta un luogo geografico.
+
+| Colonna | Tipo        | Descrizione           |
+| ------- | ----------- | --------------------- |
+| id      | Integer     | ID del luogo (Chiave) |
+| name    | String(50)  | Nome del luogo        |
+| lat     | Float       | Latitudine del luogo  |
+| lon     | Float       | Longitudine del luogo |
+
+### Condition
+Rappresenta le condizioni meteo.
+
+| Colonna     | Tipo       | Descrizione                        |
+| ----------- | ---------- | ---------------------------------- |
+| id          | Integer    | ID della condizione meteo (Chiave) |
+| description | String(50) | Descrizione della condizione meteo |
+
+### Forecast
+Rappresenta una previsione meteo per un luogo e una data specifici.
+
+| Colonna        | Tipo        | Descrizione                                          |
+| -------------- | ----------- | ---------------------------------------------------- |
+| id             | Integer     | ID della previsione (Chiave)  |
+| placeid        | Integer     | ID del luogo (Chiave Esterna di Place)   |
+| date           | DateTime    | Data della previsione                                |
+| condition      | Integer     | ID della condizione meteo (Chiave Esterna di Condition) |
+| temperature    | Float       | Temperatura                                 |
+| rain           | Float       | Quantità di pioggia                         |
+| humidity       | Integer     | Percentuale di umidità                      |
+| wind           | Integer     | Velocità del vento                          |
+| wind_direction | String(5)   | Direzione del vento                         |
+
+### User
+Rappresenta un utente del sistema.
+
+| Colonna    | Tipo       | Descrizione                     |
+| ---------- | ---------- | ------------------------------- |
+| id         | Integer    | ID dell'utente (chiave)         |
+| username   | String(50) | Nome utente (unico e non nullo) |
+| hashed_pw  | String(64) | Password criptata               |
+| apikey     | String(40) | API key associata all'utente    |
+
+
+
 # Documentazione API
 
 
