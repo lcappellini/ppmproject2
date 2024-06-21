@@ -26,24 +26,49 @@
                     <td>
                         <ul>
                             <li><strong>key</strong> - API key (required)</li>
-                            <li><strong>placename</strong> - Place name (optional)</li>
-                            <li><strong>lat</strong>, <strong>lon</strong> - Coordinates (optional)</li>
-                            <li><strong>coords</strong> - Coordinates (optional)</li>
-                            <li><strong>placeid</strong> - Place ID (optional)</li>
-                            <li><strong>date</strong> - Date in ISO format (optional)</li>
-                            <li><strong>details</strong> - Include additional details (optional)</li>
+                        </ul>
+                        <ul><span class="method">GET</span>
+                            <li><strong>placename</strong> - Place name</li>
+                            <li><strong>placeid</strong> - Place ID</li>
+                            <li><strong>date</strong> - Date in ISO format (required)</li>
+                            <li><strong>details</strong> - Whether to include additional details (condition description and place name) (optional)</li>
+                        </ul>
+                        <ul><span class="method">PUT</span>
+                            <li><strong>placeid</strong> - Place ID</li>
+                            <li><strong>date</strong> - Date in ISO format (required)</li>
+                            <li><strong>condition</strong> - Weather condition id (optional)</li>
+                            <li><strong>rain</strong> - Rain (mm) (optional)</li>
+                            <li><strong>humidity</strong> - Humidity percentage (optional)</li>
+                            <li><strong>wind</strong> - Wind speed (km/h) (optional)</li>
+                            <li><strong>wind_direction</strong> - Wind direction (optional)</li>
+                        </ul>
+                        <ul><span class="method">DELETE</span>
+                            <li><strong>forecastid</strong> - Forecast id</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
                     <td>/api/places</td>
-                    <td class="method">GET</td>
-                    <td>Retrieves place data: supports querying by name or coordinates</td>
+                    <td class="method">GET, PUT, DELETE</td>
+                    <td>Retrieves place data: supports retrieving, uploading or deleting places data</td>
                     <td>
                         <ul>
-                            <li><strong>placename</strong> - Place name (optional)</li>
-                            <li><strong>lat</strong>, <strong>lon</strong> - Coordinates (optional)</li>
-                            <li><strong>coords</strong> - Coordinates (optional)</li>
+                            <li><strong>key</strong> - API key (required)</li>
+                        </ul>
+                        <ul><span class="method">GET</span>
+                            <li><strong>placeid</strong> - Place id</li>
+                            <li><strong>placename</strong> - Place name</li>
+                        </ul>
+                        <ul><span class="method">PUT</span>
+                            <li><strong>placeid</strong> - Place id</li>
+                            <li><strong>placename</strong> - Place name</li>
+                            <li><strong>lat</strong> - Latitude (optional)</li>
+                            <li><strong>lon</strong> - Longitude (optional)</li>
+                            <li><strong>coords</strong> - Coordinates 'float,float' (optional)</li>
+                        </ul>
+                        <ul><span class="method">DELETE</span>
+                            <li><strong>placeid</strong> - Place id</li>
+                            <li><strong>placename</strong> - Place name</li>
                         </ul>
                     </td>
                 </tr>
@@ -53,6 +78,9 @@
                     <td>Retrieves weather condition data: supports querying by condition ID</td>
                     <td>
                         <ul>
+                            <li><strong>key</strong> - API key (required)</li>
+                        </ul>
+                        <ul><span class="method">GET</span>
                             <li><strong>id</strong> - Condition ID (optional)</li>
                         </ul>
                     </td>
@@ -60,60 +88,17 @@
                 <tr>
                     <td>/api/alltables</td>
                     <td class="method">GET</td>
-                    <td>Retrieves all data from all tables in the database</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/</td>
-                    <td class="method">GET</td>
-                    <td>Renders the home page</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/login</td>
-                    <td class="method">GET, POST</td>
-                    <td>Manages user login: renders the login page or handles login form submission</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/logout</td>
-                    <td class="method">GET</td>
-                    <td>Logs out the user and redirects to the home page</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/register</td>
-                    <td class="method">GET, POST</td>
-                    <td>Manages user registration: renders the registration page or handles registration form submission</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/apicalls</td>
-                    <td class="method">GET</td>
-                    <td>Renders this page</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/dashboard</td>
-                    <td class="method">GET</td>
-                    <td>Renders the profile page for logged-in users</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>/generateapikey</td>
-                    <td class="method">GET</td>
-                    <td>Generates a new API key for the logged-in user</td>
+                    <td>Retrieves all data from all tables in the database (for debug purpose, since this project is a "demo")</td>
                     <td></td>
                 </tr>
             </table>
 
-
-            <h2>Examples</h2>
+            <h2>Examples (GET requests)</h2>
             <ul class="example-list">
                 <li><a href="/api/forecast?placeid=1&date=2024-06-21&details=true&key=YOUR_API_KEY">.../api/forecast?placeid=1&date=2024-06-21&details=true&key=YOUR_API_KEY</a></li>
                 <li><a href="/api/forecast?placename=Prato&date=2024-06-20&key=YOUR_API_KEY">.../api/forecast?placename=Prato&date=2024-06-20&key=YOUR_API_KEY</a></li>
-                <li><a href="/api/conditions?id=1">.../api/conditions?id=1</a></li>
-                <li><a href="/api/places?placename=Firenze">.../api/places?placename=Firenze</a></li>
+                <li><a href="/api/conditions?id=1&key=YOUR_API_KEY">.../api/conditions?id=1&key=YOUR_API_KEY</a></li>
+                <li><a href="/api/places?placename=Firenze&key=YOUR_API_KEY">.../api/places?placename=Firenze&key=YOUR_API_KEY</a></li>
             </ul>
 
             <div>

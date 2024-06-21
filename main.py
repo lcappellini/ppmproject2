@@ -148,6 +148,11 @@ def apicalls():
     return render_template("apicalls.html")
 
 
+@app.route("/urlslist")
+def urlslist():
+    return render_template("urlslist.html")
+
+
 @app.route("/dashboard")
 def dashboard():
     if "username" in session:
@@ -175,22 +180,25 @@ def generateapikey():
 
 @app.route("/api/forecast", methods=["GET", "PUT", "DELETE"])
 def forecastAPI():
-    if request.method == "GET":
-        if "key" in request.args:
-            if not validate_key(request.args["key"]):
+    if "key" in request.args:
+        if not validate_key(request.args["key"]):
+            if request.args["key"] == "YOUR_API_KEY":
+                return create_error_json(401, "Unauthorized or invalid API key. Replace 'YOUR_API_KEY' with your actual API key.")
+            else:
                 return create_error_json(401, "Unauthorized or invalid API key.")
-        else:
-            return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
+    else:
+        return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
 
-        if "placename" in request.args:
+    if request.method == "GET":
+        if "placeid" in request.args:
+            placeid = request.args["placeid"]
+        elif "placename" in request.args:
             placename = request.args["placename"]
             place = Place.query.filter(func.lower(Place.name) == func.lower(placename)).first()
             if place is None:
                 return create_error_json(400, "Place not found. Check the value or use another parameter to specify a place.")
             else:
                 placeid = place.id
-        elif "placeid" in request.args:
-            placeid = request.args["placeid"]
         else:
             return create_error_json(400, "Missing required parameter, one of the following must be used: 'placename' or 'placeid'.")
 
@@ -233,12 +241,6 @@ def forecastAPI():
             return result
 
     elif request.method == "PUT":
-        if "key" in request.form:
-            if not validate_key(request.form["key"]):
-                return create_error_json(401, "Unauthorized, invalid or missing API key.")
-        else:
-            return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
-
         if "placeid" in request.form:
             placeid = request.form["placeid"]
         else:
@@ -268,15 +270,9 @@ def forecastAPI():
         db.session.add(forecast)
         db.session.commit()
 
-        return "Uploaded", 200
+        return {"message": "Forecast updated successfully"}, 200
 
     elif request.method == "DELETE":
-        if "key" in request.form:
-            if not validate_key(request.form["key"]):
-                return create_error_json(401, "Unauthorized or invalid API key.")
-        else:
-            return create_error_json(400, "Missing required parameter 'key'. Request an API key from the homepage.")
-
         if "forecastid" in request.form:
             forecastid = request.form["forecastid"]
         else:
@@ -288,11 +284,21 @@ def forecastAPI():
         else:
             db.session.delete(forecast)
             db.session.commit()
-        return "Deleted", 200
+
+        return {"message": "Forecast deleted successfully"}, 200
 
 
-@app.route("/api/places", methods=["GET", "PUT"])
+@app.route("/api/places", methods=["GET", "PUT", "DELETE"])
 def placesAPI():
+    if "key" in request.args:
+        if not validate_key(request.args["key"]):
+            if request.args["key"] == "YOUR_API_KEY":
+                return create_error_json(401, "Unauthorized or invalid API key. Replace 'YOUR_API_KEY' with your actual API key.")
+            else:
+                return create_error_json(401, "Unauthorized or invalid API key.")
+    else:
+        return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
+
     if request.method == "GET":
         if "placename" in request.args:
             place = Place.query.filter(func.lower(Place.name) == func.lower(request.args["placename"])).first()
@@ -307,16 +313,15 @@ def placesAPI():
             return to_dict(place)
 
     elif request.method == "PUT":
-        if "key" in request.form:
-            if not validate_key(request.form["key"]):
-                return create_error_json(401, "Unauthorized or invalid API key.")
+        if "placeid" in request.form:
+            placeid = request.form["placeid"]
+            placename = request.form.get("placename", None)
         else:
-            return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
-
-        if "name" in request.form:
-            placename = request.form["placename"]
-        else:
-            return create_error_json(400, "Missing required parameter 'name'")
+            placeid = None
+            if "placename" in request.form:
+                placename = request.form["placename"]
+            else:
+                return create_error_json(400, "Missing required parameter, one of the following must be used: 'placename', 'placeid'")
 
         coords = request.form.get("coords", None)
         lat = request.form.get("lat", None)
@@ -333,16 +338,63 @@ def placesAPI():
         else:
             return create_error_json(400, "Missing required parameter, one of the following must be used: 'coords' or 'lat' and 'lon'.")
 
-        place = Place(name=placename,
-                      lat=lat,
-                      lon=lon)
+        if placeid is not None:
+            place = Place.query.filter_by(id=placeid).first()
+            if place is None:
+                return create_error_json(404, "No place was found in the database with the 'placeid' specified.")
+            else:
+                if placename is not None:
+                    place.name = placename
+                if lat is not None:
+                    place.lat = lat
+                if lon is not None:
+                    place.lon = lon
+        else:
+            place = Place.query.filter_by(name=placename).first()
+            if place is None:
+                place = Place(name=placename,
+                              lat=lat,
+                              lon=lon)
+                db.session.add(place)
+            else:
+                place.lat = lat
+                place.lon = lon
 
-        db.session.add(place)
         db.session.commit()
+
+        return {"message": "Place updated successfully"}, 200
+
+    elif request.method == "DELETE":
+
+        if "placeid" in request.form:
+            placeid = request.form["placeid"]
+            place = Place.query.filter_by(id=placeid).first()
+        elif "placename" in request.form:
+            placename = request.form["placename"]
+            place = Place.query.filter_by(name=placename).first()
+        else:
+            return create_error_json(400, "Missing required parameter, one of the following must be used: 'placename', 'placeid'")
+
+        if place is None:
+            return create_error_json(404, "Nothing was found in the database with the 'placeid' specified.")
+        else:
+            db.session.delete(place)
+            db.session.commit()
+
+        return {"message": "Place deleted successfully"}, 200
 
 
 @app.route("/api/conditions", methods=["GET"])
 def conditionsAPI():
+    if "key" in request.args:
+        if not validate_key(request.args["key"]):
+            if request.args["key"] == "YOUR_API_KEY":
+                return create_error_json(401, "Unauthorized or invalid API key. Replace 'YOUR_API_KEY' with your actual API key.")
+            else:
+                return create_error_json(401, "Unauthorized or invalid API key.")
+    else:
+        return create_error_json(400, "Missing required parameter: key. Request an API key from the homepage.")
+
     if request.method == "GET":
         if "id" in request.args:
             condition = Condition.query.filter_by(id=request.args["id"]).first()
@@ -363,6 +415,7 @@ def alltables():
         metadata = db.MetaData()
         metadata.reflect(bind=db.engine)
 
+        # gets all rows of all tables and puts them in a dictionary
         from sqlalchemy import Table
         result = []
         for table_name in metadata.tables.keys():

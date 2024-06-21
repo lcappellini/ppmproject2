@@ -1,7 +1,7 @@
-import requests
+# import requests
 
-url = "http://127.0.0.1:5000/api/forecast"
-key = "35b417e58b07f0148e2e8417d99a5b83af51e669"
+# url = ".../api/forecast"
+# key = "YOUR_API_KEY"
 
 # data = {"key": key,
 #         "placeid": 1,
@@ -18,9 +18,29 @@ key = "35b417e58b07f0148e2e8417d99a5b83af51e669"
 # print(req)
 # print(req.text)
 
-data = {"key": key,
-        "forecastid": 8}
-req = requests.delete(url, data=data)
+# data = {"key": key,
+#         "forecastid": 8}
+# req = requests.delete(url, data=data)
+#
+# print(req)
+# print(req.text)
 
-print(req)
-print(req.text)
+
+# url = ".../api/places"
+
+# data = {"key": key,
+#         "placename": "Milano",
+#         "lat": 45.4685,
+#         "lon": 9.1824}
+#
+# req = requests.put(url, data=data)
+#
+# print(req.text)
+
+# data = {"key": key,
+#         "placeid": 4}
+# req = requests.delete(url, data=data)
+#
+# print(req)
+# print(req.text)
+
