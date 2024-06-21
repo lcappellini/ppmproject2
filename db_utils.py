@@ -34,9 +34,9 @@ def reset_db(app, db):
             db.session.add(Condition(description=condition))
 
         #
-        db.session.add(Place(id=1, name="Firenze", center_lat=43.77, center_lon=11.2577, radius=4.5))
-        db.session.add(Place(id=2, name="Prato", center_lat=43.8777, center_lon=11.1022, radius=0))
-        db.session.add(Place(id=3, name="Roma", center_lat=43.8777, center_lon=11.1022, radius=0))
+        db.session.add(Place(id=1, name="Firenze", lat=43.77, lon=11.2577))
+        db.session.add(Place(id=2, name="Prato", lat=43.8777, lon=11.1022))
+        db.session.add(Place(id=3, name="Roma", lat=43.8777, lon=11.1022))
 
         # add sample entities to db for testing purpose
         db.session.add(Forecast(placeid=1, date=datetime(2024, 6, 19), condition=1, temperature=31.3, rain=0, humidity=30, wind=3, wind_direction="N"))

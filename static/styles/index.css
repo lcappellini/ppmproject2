@@ -8,7 +8,7 @@ body {
 }
 
 button {
-    width: 100px;
+    width: 110px;
     height: 50px;
     border: none;
     border-radius: 5px;
@@ -121,4 +121,29 @@ input {
 
 ul.example-list li {
     padding: 5px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+th {
+    font-size: 20px;
+}
+.method {
+    font-weight: bold;
+    color: #007BFF;
+}
+.param ul {
+    list-style-type: none;
+    padding: 0;
+}
+.param li {
+    margin-left: 20px;
 }

@@ -9,7 +9,7 @@ from sqlalchemy import func
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/db.db'
 db = SQLAlchemy(app)
 
 
@@ -54,7 +54,7 @@ def hash_password(password):
 
 
 def create_error_json(errorcode, message=""):
-    return {"Errorcode": errorcode, "message": message}
+    return {"errorcode": errorcode, "message": message}, errorcode
 
 
 def validate_key(key):

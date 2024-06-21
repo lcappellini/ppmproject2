@@ -4,31 +4,6 @@
     <meta charset="UTF-8">
     <title>MyWeather API</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            font-size: 20px;
-        }
-        .method {
-            font-weight: bold;
-            color: #007BFF;
-        }
-        .param ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .param li {
-            margin-left: 20px;
-        }
-    </style>
 </head>
 <body>
     <div>
@@ -135,10 +110,10 @@
 
             <h2>Examples</h2>
             <ul class="example-list">
-                <li><span>.../api/forecast?placeid=1&date=2024-06-21&details=true&key=YOUR_API_KEY</span></li>
-                <li><span>.../api/forecast?placename=Prato&date=2024-06-20&key=YOUR_API_KEY</span></li>
-                <li><span>.../api/conditions?id=1</span></li>
-                <li><span>.../api/places?placename=Firenze</span></li>
+                <li><a href="/api/forecast?placeid=1&date=2024-06-21&details=true&key=YOUR_API_KEY">.../api/forecast?placeid=1&date=2024-06-21&details=true&key=YOUR_API_KEY</a></li>
+                <li><a href="/api/forecast?placename=Prato&date=2024-06-20&key=YOUR_API_KEY">.../api/forecast?placename=Prato&date=2024-06-20&key=YOUR_API_KEY</a></li>
+                <li><a href="/api/conditions?id=1">.../api/conditions?id=1</a></li>
+                <li><a href="/api/places?placename=Firenze">.../api/places?placename=Firenze</a></li>
             </ul>
 
             <div>
