@@ -40,14 +40,14 @@ button:active {
     margin-bottom: 10px;
     display: block;
 }
-.login-form input {
+input {
     border: 1px solid #CCCCCC;
-    padding: .5em;
-    font-size: 1em;
-    border-radius: 2px;
+    background-color: #141414;
+    padding: 8px;
+    font-size: 18px;
+    border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-    color: #1C1E26;
 }
 .login-form button {
     margin-top: 10px;
@@ -83,7 +83,6 @@ button:active {
 .data-item .username-span {
     flex: 1;
     padding-left: 8px;
-    border-radius: 5px;
     font-size: 20px;
     line-height: 1.5;
     white-space: pre-wrap;
@@ -91,15 +90,12 @@ button:active {
 }
 .api-key {
     flex: 1;
-    color: #1C1E26;
     user-select: text;
-    background-color: #f9f9f9;
     padding: 8px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
     line-height: 1.5;
-    min-width: 200px; /* Imposta una larghezza minima per l'input API Key */
+    min-width: 200px;
 }
 .data-item button {
     margin-left: 5px;
@@ -121,4 +117,8 @@ button:active {
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
+}
+
+ul.example-list li {
+    padding: 5px;
 }
