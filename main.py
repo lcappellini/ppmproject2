@@ -7,7 +7,11 @@ import os
 
 from sqlalchemy import func
 
-app = Flask(__name__, instance_path=os.path.join(os.getcwd(), "tmp"))
+if "VERCEL" in os.environ:
+    app = Flask(__name__, instance_path="/tmp")
+else:
+    app = Flask(__name__)
+
 app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 db = SQLAlchemy(app)
@@ -370,5 +374,5 @@ def alltables():
 
 
 if __name__ == "__main__":
-    # reset_db(app, db)
+    reset_db(app, db)
     app.run(debug=False)
