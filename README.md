@@ -2,6 +2,10 @@
 
 MyWeather API è un'API RESTful basata su Flask che fornisce previsioni meteo. Include autenticazione degli utenti e gestione delle chiavi API.
 
+## Link di Deploy
+
+[myweatherapi.vercel.app](https://myweatherapi.vercel.app)
+
 ## Struttura del Progetto
 
 Il progetto include i seguenti file e cartelle:
