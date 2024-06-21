@@ -51,6 +51,12 @@ class User(db.Model):
 
 from db_utils import reset_db
 
+with app.app_context():
+    metadata = db.MetaData()
+    metadata.reflect(bind=db.engine)
+    if len(metadata.sorted_tables) == 0:
+        reset_db(app, db)
+
 
 import hashlib
 def hash_password(password):
@@ -374,5 +380,4 @@ def alltables():
 
 
 if __name__ == "__main__":
-    reset_db(app, db)
     app.run(debug=False)
