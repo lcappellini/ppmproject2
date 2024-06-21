@@ -73,7 +73,7 @@ Rappresenta un utente del sistema.
 # Documentazione API
 
 
-### /api/forecast
+### `/api/forecast`
 
 Gestisce i dati delle previsioni meteo per luoghi specifici.
 
@@ -121,7 +121,7 @@ Cancella i dati delle previsioni meteo.
 - 400 Bad Request: Parametri mancanti o non validi.
 - 401 Unauthorized: API key non valida.
 
-### /api/places
+### `/api/places`
 
 Gestisce le informazioni sui luoghi specifici.
 
@@ -169,7 +169,7 @@ Cancella le informazioni su un luogo specifico.
 - 401 Unauthorized: API key non valida.
 
 
-### /api/conditions
+### `/api/conditions`
 
 Gestisce le informazioni sulle condizioni meteo.
 
@@ -186,3 +186,13 @@ Recupera le informazioni su una condizione meteo (la sua descrizione).
 - 400 Bad Request: Parametri mancanti o non validi.
 - 401 Unauthorized: API key non valida.
 - 404 Not Found: Nessuna condizione meteo trovata con i parametri specificati.
+
+
+### `/api/alltables`
+
+Restituisce tutti i dati delle tabelle del database. Ha solo scopo di DEBUG e non è previsto in una versione "ufficiale".
+
+#### GET
+
+**Risposte:**
+- 200 OK: Restituisce tutti i dati del db.
