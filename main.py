@@ -303,7 +303,7 @@ def placesAPI():
         if "placename" in request.args:
             place = Place.query.filter(func.lower(Place.name) == func.lower(request.args["placename"])).first()
         elif "placeid" in request.args:
-            place = Place.query.filter(func.lower(Place.name) == func.lower(request.args["placename"])).first()
+            place = Place.query.filter_by(id=request.args["placeid"]).first()
         else:
             return create_error_json(400, "Missing required parameter, one of the following must be used: 'placename', 'placeid'")
 
@@ -371,7 +371,7 @@ def placesAPI():
             place = Place.query.filter_by(id=placeid).first()
         elif "placename" in request.form:
             placename = request.form["placename"]
-            place = Place.query.filter_by(name=placename).first()
+            place = Place.query.filter(func.lower(Place.name) == func.lower(placename)).first()
         else:
             return create_error_json(400, "Missing required parameter, one of the following must be used: 'placename', 'placeid'")
 
